@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <!-- 组件化模板抽离 -->
+  <div id="app">
+    <cpn></cpn>
+  </div>
+
+  <!-- 1.使用script标签，类型为 text/x-template -->
+  <script type="text/x-template" id="myCpn">
+    <!-- 模板 -->
+    <div>
+      <h2>{{title}}</h2>
+      <p>哈哈哈</p>
+  </div>
+  </script>
+
+  <!-- 2. 使用script标签-->
+  <template id="my">
+    <!-- 模板 -->
+    <div>
+      <h2>组件标题2</h2>
+      <p>嘻嘻嘻</p>
+  </div>
+  </template>
+
+  <div id="app-1">
+    <cp></cp>
+    <!-- 局部 -->
+  </div>
+
+
+
+  <!-- 组件中的data必须是函数 -->
+  <div id="app-2">
+    <!-- 三个为独立 -->
+    <c></c>
+    <c></c>
+    <c></c>
+  </div>
+
+
+  
+  <template id="me">
+    <!-- 模板 -->
+    <div>
+      <h2>当前计数：{{num}}</h2>
+      <button @click = "add">+</button>
+      <button @click = "div" :disabled = "num <= 0">-</button>
+  </div>
+  </template>
+
+  <script>
+    //注册全局组件
+    Vue.component('cpn',{
+      template:'#myCpn',
+      data() {//组件数据存放，且必须是函数
+        return {
+          title:'abc'
+        }
+      },
+    })
+    var app= new Vue({
+      el: '#app'
+    });
+
+    //注册全局部组件
+    var app1= new Vue({
+      el: '#app-1',
+      components:{
+        'cp':{
+          template:'#my'
+        }
+      }
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      components:{
+        'c':{
+          template:'#me',
+          data() {
+            return {
+              num  : 0
+            }
+          },
+          methods: {
+            add(){
+              this.num ++
+            },
+            div(){
+              this.num --
+            }
+          },
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

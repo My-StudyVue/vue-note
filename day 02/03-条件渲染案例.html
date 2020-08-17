@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>案例</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span v-if =isUser>
+      <label for = 'username'>用户账号：</label><!--for 聚焦--->
+      <input placeholder="用户账号" type="text" id="username">
+    </span>
+    <span v-else>
+      <label for = 'email'>邮箱地址：</label>
+      <input placeholder="邮箱地址" type="text" id="email">
+    </span>
+    <button @click = " isUser = !isUser">切换类型</button>
+  </div>
+
+  <!-- 小问题——input值复用,解决使用key -->
+  <div id="app-1">
+    <br>
+    <span v-if =isUser>
+      <label for = 'username'>用户账号：</label><!--for 聚焦--->
+      <input placeholder="用户账号" type="text" id="username" key="username">
+    </span>
+    <span v-else>
+      <label for = 'email'>邮箱地址：</label>
+      <input placeholder="邮箱地址" type="text" id="email" key="email">
+    </span>
+    <button @click = " isUser = !isUser">切换类型</button>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        isUser : true
+      },
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      data: {
+        isUser : true
+      },
+        // methods: {
+        //   handSwitch(){
+        //     this.type = ! this.type === 'email ' ? 'username' : 'username'
+        //   }
+        // },
+    });
+  </script>
+</body>
+
+</html>

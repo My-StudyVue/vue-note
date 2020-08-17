@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父子组件通信的双向绑定</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <cpn :number1 = "num1"  :number2 = "num2"
+                @number1-change ="num1Change" @number2-change ="num2Change"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2>子传父：{{number1}}</h2>
+      <h2>父传子：{{dnumber1}}</h2>
+      <input type="text" :value ="dnumber1" @input = "num1Input">
+      <h2>子传父：{{number2}}</h2>
+      <h2>父传子：{{dnumber2}}</h2>
+      <input type="text" :value ="dnumber2"  @input = "num2Input">
+    </div>
+  </template>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        num1:0,
+        num2:1
+      },
+      methods: {
+        num1Change(value){
+          this.num1 = parseFloat(value)//string转化number
+        },
+        num2Change(value){
+          this.num2 = parseFloat(value)
+        }
+      },
+      components:{
+        cpn:{
+          template:'#cpn',
+          props:{
+            number1:Number,
+            number2:Number
+          },
+          data() {
+            return {
+              dnumber1 : this.number1,
+              dnumber2 : this.number2
+            }
+          },
+          methods: {
+            num1Input(e){
+              //1.将input中的value赋值到dnumber中
+              this.dnumber1 = e.target.value;
+
+              //2.为了让父组件可以修改值，发出一个事件
+              this.$emit('number1-change',this.dnumber1)
+
+              //3.同时修改dnumber2的值
+              this.dnumber2 = this. dnumber1 * 100;
+              this.$emit('number2-change',this.dnumber2)
+            },
+            num2Input(e){
+              this.dnumber2 = e.target.value;
+              this.$emit('number2-change',this.dnumber2)
+              this.dnumber1 = this. dnumber2 / 100;
+              this.$emit('number1-change',this.dnumber1)
+            }
+          },
+        },
+      }
+    });
+  </script>
+</body>
+
+</html>

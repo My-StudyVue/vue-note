@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <p>Hello {{name}}</p>
+      <!-- Mustache语法，双大括号 -->
+      <p>{{firstName}} {{lastName}}</p>
+      <p>{{counter * 2}}</p>
+      <!-- mustache不仅可以直接写变量，也可以写简单的表达式 -->
+    </div>
+
+    <div id="app-1">
+      <p v-once>{{message}}</p>
+      <!-- v-once 只渲染一次，不会随着数据的改变而改变 -->
+    </div>
+
+    <div id="app-2">
+      <p>{{url}}</p>
+      <p v-html="url"></p>
+      <!-- 解析出html -->
+    </div>
+
+    <div id="app-3">
+      <p>{{message}}，傻子</p>
+      <p v-text="message">，傻子</p>
+      <!-- v-text 和 Mustache相似，都是用于将数据显示在界面中 -->
+      <!-- 一般不使用，不够灵活 -->
+    </div>
+
+    <div id="app-4">
+      <p>{{message}}</p>
+      <p v-pre>{{message}}</p>
+      <!-- v-pre不解析mustache,原封不动的显示出来 -->
+      <!-- 一般不使用-->
+    </div>
+
+    <div id="app-5" v-cloak>{{message}}</div>
+    <!-- 在vue解析之前,div中有个属性v-cloak -->
+    <!-- 在vue解析之后,div中没有属性v-clock -->
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          name: "VueJS",
+          firstName: "coder",
+          lastName: "why",
+          counter: 100,
+        },
+      });
+
+      var app1 = new Vue({
+        el: "#app-1",
+        data: {
+          message: "你好啊",
+        },
+      });
+
+      var app2 = new Vue({
+        el: "#app-2",
+        data: {
+          url: '<a href="http://www.baidu.com">百度一下</a>', //标签a
+          // 绑定a元素的href属性,href超链接
+        },
+      });
+
+      var app3 = new Vue({
+        el: "#app-3",
+        data: {
+          message: "hello",
+        },
+      });
+
+      var app4 = new Vue({
+        el: "#app-4",
+        data: {
+          message: "你好",
+        },
+      });
+
+      setTimeout(function () {
+        //延时
+        var app5 = new Vue({
+          el: "#app-5",
+          data: {
+            message: "你好",
+          },
+        });
+      }, 10000);
+    </script>
+  </body>
+</html>

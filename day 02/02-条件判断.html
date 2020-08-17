@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <!-- v-if的使用 -->
+  <div id="app">
+    <h2 v-if = isShow>
+        <div>a</div>
+        <div>a</div>
+        <div>a</div>
+       {{message}}
+    </h2>
+  </div>
+
+  <!-- v-if和v-else的结合使用 -->
+  <div id="app-1">
+    <h2 v-if = isShow>
+        <div>a</div>
+        <div>a</div>
+        <div>a</div>
+       {{message}}
+    </h2>
+    <!-- v-else不需要跟条件 -->
+    <h1 v-else>hhh</h1>
+  </div>
+
+  <!-- v-if 和 v-else-if 和 v-else的结合使用 -->
+  <div id="app-2">
+    <!-- <p v-if = "score >= 90">优秀</p>
+    <p v-else-if = "score >= 80">良好</p>
+    <p v-else-if = "score >= 60">及格</p>
+    <p v-else= "score < 60">不及格</p> -->
+    
+    <!-- 利用计算属性更简便 -->
+    <h1>{{result}}</h1>
+  </div>
+
+   <!-- v-show的使用，切换频率很多时使用 -->
+   <div id="app-3">
+     <button @click = 'handSwitch'>切换显示</button>
+     <!-- v-if : 当条件为false时，包含v-if指令的元素，根本不会存在dom中-->
+     <h2 v-if = "IsShow">显示？不显示？</h2>
+     <!-- v-show:当条件为false时，v-show只是给我们的元素添加一个行内样式——display  : none-->
+     <h2 v-show = "IsShow">显示？不显示？</h2>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        message:"你好",
+        isShow : true,
+      }
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      data: {
+        message:"你好",
+        isShow : true,
+      }
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      data: {
+        score : 40
+      },
+      computed: {
+        result(){
+          let message = '';
+          if(this.score >= 90){
+            message = "优秀"
+          }else if (this.score >= 80){
+            message = "良好"
+          }else if (this.score >= 60){
+            message = "及格"
+          }else if (this.score < 60){
+            message = "不及格"
+          }
+          return  message
+        }
+      },
+    });
+
+    var app3= new Vue({
+      el: '#app-3',
+      data: {
+        IsShow : true,
+      },
+      methods: {
+        handSwitch(){
+          this.IsShow = !this.IsShow
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

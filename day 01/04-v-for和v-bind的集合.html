@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>作业</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .fontcolor {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 点击列表哪项，哪项就变红 -->
+  <div id="app">
+    <ul>
+      <li v-for = "(item,index) in movies" :class="{fontcolor:index==num}" @click="clickAdd(index)">{{item}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        movies:['海王','海尔兄弟','火影忍者','进击的巨人'],
+        num:-1
+        //数组下标从0开始
+      },
+      methods: {
+        clickAdd: function (index) {
+          this.num=index
+          }
+      }
+    });
+  </script>
+</body>
+
+</html>

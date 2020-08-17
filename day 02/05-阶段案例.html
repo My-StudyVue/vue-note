@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>书籍购物车</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- <link rel="stylesheet" href="style.css"> 引入文件
+  <script src="main.js"></script> -->
+
+  <style>
+    table{
+      border: 1px solid #e9e9e9;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+    th,td{
+      padding: 8px 16px;
+      border: 1px solid #e9e9e9;
+      text-align: left;
+    }
+    th{
+      background-color: #f7f7f7;
+      color: #5c6b77;
+      font-weight: 600;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- 书籍购物车 -->
+  <div id="app">
+    <div v-if='books.length'>
+      <table>
+        <thead>  <!-- 标题-->
+          <tr> <!-- 行-->
+            <th></th> <!-- 列 -->
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>  <!-- 内容 -->
+          <tr v-for='(item,index) in books'>
+            <!-- <td v-for='value in item'>{{value}}</td> -->
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.data}}</td>
+    
+            <!-- <td>{{'￥'+item.price.toFixed(2)}}</td> -->
+            <!-- <td>{{getPrice(item.price)}}</td> --><!-- methods -->
+            <td>{{item.price | showPrice}}</td>
+    
+            <td>
+              <button @click="div(index)" :disabled = "item.count <= 1">-</button>
+              {{item.count}}
+              <button @click="add(index)">+</button>
+            </td>
+            <td><button @click = "remove(index)">移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>总价格：{{price |  showPrice}}</h2>
+    </div>
+    <h1 v-else>购物车为空</h1>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        books:[
+          {
+            id:1,
+            name:'《数学》',
+            data:'2018-06',
+            price: 35.00,
+            count:1
+          },
+          {
+            id:2,
+            name:'《物理》',
+            data:'2018-06',
+            price: 45.00,
+            count:1
+          },
+          {
+            id:3,
+            name:'《英语》',
+            data:'2020-06',
+            price: 25.00,
+            count:1
+          },
+          {
+            id:4,
+            name:'《音乐》',
+            data:'2019-06',
+            price: 15.00,
+            count:1
+          },
+        ]
+      },
+        methods: {
+          // getPrice(price){
+          //   return '￥'+ price.toFixed(2)
+          // }
+          div(index){
+            this.books[index].count--
+          },
+          add(index){
+            this.books[index].count++
+          },
+          remove(index){
+            this.books.splice(index,1)
+          }
+        },
+        filters:{//过滤器——函数
+          showPrice(price){
+            return '￥'+ price.toFixed(2)
+          }
+        },
+        computed: {
+          price:function(){
+            //1.普通的for循环
+            // let result = 0
+            // for(let i=0;i<this.books.length;i++){
+            //   result += this.books[i].price * this. books[i].count
+            // }
+            // return result
+
+            //2.for(let i in/for this.books)
+            // let result = 0
+            // for(let i in this.books){
+            //   const book = this.books[i]
+            //   result += book.price * book.count
+            // }
+            // return result
+
+            // 3.for(let i of this.books)
+            // let result = 0
+            // for(let i of this.books){
+            //   result += i.price * i.count
+            // }
+            // return result
+            return this.books.reduce(function(preValue,books){
+              return preValue + books.price * books.count
+            },0)
+          }
+
+          //4.reduce
+        },
+    });
+
+    //编程范式：命令式编程/声明式编程
+    //编程范式：面向对象编程（第一公民：对象）/函数式编程（第一公民：函数）
+    //高阶函数：filter/map/reduce
+    const nums = [10,20,111,343,23,7]
+
+    //箭头函数
+    let b = nums.filter(n => n < 100).map(n => n *2).reduce((preValue,n) => preValue + n)
+    console.log(b)
+
+    // let b =nums.filter(function(n){
+    //   return n < 100
+    // }).map(function(n){
+    //   return n * 2
+    // }).reduce(function(preValue,n){
+    //   return preValue + n
+    // },0)
+    // console.log(b)
+
+  //   //1.filter函数
+  //   let newNums = nums.filter(function(n){//回调函数的要求：必须返回一个boolean值
+  //   //true:自动将回调的加入到新数组去，false:内部自动过滤掉n
+  //       return  n<100
+  //   })
+  //   console.log(newNums)
+
+  //   //2.map函数
+  //   let a = newNums.map(function(n){
+  //     return n * 2
+  //   })
+  //   console.log(a)
+
+  //   //3.reduce函数--------对数组中所有内容进行汇总
+  //  let b = a.reduce(function(preValue,n){
+  //     return preValue + n
+  //   },0)
+  //   console.log(b)
+
+  //   //1.需求：取出所有100的数字
+  //   let newNums = []
+  //   for (let n of nums){
+  //       if(n<100){
+  //         newNums.push(n)
+  //       }
+  //   }
+  //   console.log(newNums)
+
+  //   //2.需求：将所有小于100的数字进行转化：全部*2\
+  //   let  a = []
+  //   for (let n of newNums){
+  //       a.push(n * 2)
+  //   }
+  //   console.log(a)
+
+  //   //3.需求：将所有a数组里面的数字相加，得到最后的结果
+  // let b =0
+  // for (let n of a){
+  //     b += n
+  //   }
+  //   console.log(b)
+  </script>
+</body>
+
+</html>

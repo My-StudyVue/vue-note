@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue入门1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">{{ message }}</div>
+
+    <div id="app-1">
+      <span :title="message">
+        <!-- "v-"绑定指令，可省去v-bind,直接用":" -->
+        鼠标悬停几秒查看绑定的内容
+      </span>
+    </div>
+
+    <div id="app-2">
+      <p v-if="seen">现在你看到我了</p>
+      <p v-show="seen">现在你看到我了</p>
+      <!-- 控制台上 "v-if"  false看不见p标签，"v-show"false看得见p标签-->
+    </div>
+
+    <div id="app-3">
+      <ul>
+        <!-- ol有序，ul无序  -->
+        <li v-for="item in list">
+          {{item}}
+        </li>
+        <li v-for="item in list1">
+          {{ item.class_name }} {{ item.class_id }}
+        </li>
+      </ul>
+    </div>
+
+    <div id="app-4">
+      <p>当前计数：{{counter}}</p>
+      <button v-on:click="jia">+</button>
+      <button @click="jian">-</button>
+      <!-- "@click"是语法糖//简写-->
+    </div>
+
+    <script>
+      //let(ES6变量) /const(常量)
+      var app = new Vue({
+        el: "#app", //页面标签
+        data: {
+          //定义数据
+          message: "hello",
+        },
+      });
+      var app1 = new Vue({
+        el: "#app-1", //字符串String
+        // el:document.querySelector(),//HYMLElement
+        data: {
+          message: "页面加载于" + new Date().toLocaleDateString(), //本地时间
+        },
+      });
+      var app2 = new Vue({
+        el: "#app-2",
+        data: {
+          seen: true, //对象类型Object
+        },
+      });
+      var app3 = new Vue({
+        el: "#app-3",
+        data: {
+          //组件当中data必须是个函数
+          list: [
+            //.push是最下面加元素，.shift是最上面减元素
+            "a",
+            "b",
+            "c",
+          ],
+          list1: [
+            { class_name: "hei", class_id: 1 },
+            { class_name: "ha", class_id: 2 },
+            { class_name: "xi", class_id: 3 },
+          ],
+        },
+      });
+      var app4 = new Vue({
+        //还可以写生命周期函数
+        el: "#app-4",
+        data: {
+          counter: 0,
+        },
+        methods: {
+          //{ [key:string]:Function}
+          jia: function () {
+            this.counter++;
+          },
+          jian: function () {
+            this.counter--;
+          },
+        },
+        //   beforeCreate:function(){
+
+        //   },
+        //   created:function() {
+        //       console.log('created')
+        //   },
+        //   mounted:function() {
+        //       console.log('mounted')
+        //   },生命周期函数，可不定义
+        //callHook()----->回调函数n
+      });
+    </script>
+  </body>
+</html>

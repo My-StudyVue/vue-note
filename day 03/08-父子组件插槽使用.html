@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <!-- 1.插槽slot的基本使用——预留位置 -->
+  <!-- 
+    1.插槽的基本使用 <slot></slot>
+    2.插槽的默认标签 <slot><button></button></slot>
+    3.如果有多个标签，同时放入到组件进行替换时，一起作为替换元素
+   -->
+  <div id="app">
+    <cpn></cpn><!--显示默认标签 -->
+    <cpn>
+      <span>hhh</span>
+      <!-- <span>在行内定义一个区域 -->
+    </cpn>
+    <cpn>
+      <i>xxx</i>
+      <!-- <i> 标签显示斜体文本效果。 -->
+    </cpn>
+  </div>
+  <template id="low">
+    <div>
+      <h1>哈哈哈</h1>
+      <h3>你好</h3>
+      <slot>
+        <button>按钮</button>
+        <!-- 设置默认标签 -->
+      </slot>
+    </div>
+  </template>
+
+  <!--2.具名插槽 slot 设置name -->
+  <div id="app-1">
+    <cp>
+      <span>标题</span>
+      <!-- 只替换没有name的 -->
+      <span slot="center">标题</span>
+      <button slot="right">返回</button>
+    </cp>
+  </div>
+  <template id="hight">
+    <div>
+      <slot name = "left">
+        <span>左边</span>
+      </slot>
+      <slot name = "center">
+        <span>中间</span>
+      </slot>
+      <slot name = "right">
+        <span>右边</span>
+      </slot>
+
+      <slot>哈哈哈</slot>
+      <!-- 只替换没有name的 -->
+    </div>
+  </template>
+
+  <!-- 作用域插槽——父组件替换插槽的标签，内容由子组件提供-->
+  <div id="app-2">
+    <c></c>
+    <c>
+      <!-- 目的是获取子组件的 language-->
+      <template slot-scope = "slot">
+        <!--2.调用使用 slot-scope -->
+        <span v-for = "item in slot.abc"> {{item}} - </span>
+        <!-- 3. 调用数据使用 slot.名字-->
+        <br>
+        <span>{{ slot.abc.join(' - ') }}</span>
+        <!-- join:数组转为字符串,且用('')里的元素作为连接 -->
+      </template>
+    </c>
+  </div>
+  <template id="center">
+    <div>
+      <slot :abc = " language">
+        <!-- 1.需要用（：名字 ）=“数据”-->
+        <ul>
+          <li v-for = "item in language">{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      components:{
+        cpn:{
+          template:'#low'
+        }
+      }
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      components:{
+        cp:{
+          template:'#hight'
+        }
+      }
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      components:{
+        c:{
+          template:'#center',
+          data() {
+            return {
+              language:['js','c++','python','java','ts','go','c#']
+            }
+          },
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

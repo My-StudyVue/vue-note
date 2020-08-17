@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <!-- v-on的基本使用 -->
+  <div id="app">
+    <p>{{counter}}</p>
+    <!-- <button v-on:click = "counter ++ ">+</button>
+    <button v-on:click = "counter -- ">-</button>  -->
+    <button v-on:click = "add">+</button>
+    <button @click = "div ">-</button> 
+        <!-- 事件调用的方法没有参数，可省略——()-->
+  </div>
+
+   <!-- v-on的参数问题 -->
+   <div id="app-1">
+    <p>点击次数：{{counter}}</p>
+     <!-- 在事件定义时,写函数时可省略小括号,但是方法本身是需要一个参数的-->
+    <!-- 需要一个参数这个时候vue会默认将浏览器生成event事件作为参数传入到方法 -->
+    <button @click = "handAdd">+1</button>
+    <!-- 方法定义时，我们需要event对象，同时又需要其他参数 -->
+    <!-- 手动获取浏览器参数的event对象：$event  -->
+    <button @click = "handAddTen(10,$event)">+10</button> 
+  </div>
+
+  <!-- v-on的修饰符使用 -->
+  <div id="app-2">
+    <div @click = "add ">
+      <br><!-- 换行-->
+      <button @click = "div ">按钮</button> 
+      <!-- 1.  .stop的修饰符的使用   阻止冒泡 -->
+      <button @click.stop = "div ">按钮</button>
+    </div>
+
+      <!-- 2.  .prevent的修饰符的使用   阻止默认事件-->
+      <br>
+      <form action="baidu">
+        <input type="submit" value="提交"><!-- 自动提交-->
+        <input type="submit" value="提交" @click.prevent= "submitClick"><!-- 手动提交-->
+      </form>
+
+      <!-- 3.监听键盘的输入 -->
+      <br>
+      <!-- 按下去到弹起来算一次-->
+      <input type="text" @keyup = "keyup">
+      <!-- 按 enter 的次数 -->
+      <input type="text" @keyup.enter = "keyup">
+
+      <!-- 4.  .once的修饰符的使用  只能调用一次-->
+      <br>
+      <button @click ="btn">按钮</button>
+      <button @click.once ="btn">按钮</button>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        counter: 0
+      },
+        methods: {
+          add() {
+            this.counter++;
+          },
+          div() {
+            this.counter --;
+          }
+        },
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      data: {
+        counter: 0
+      },
+        methods: {
+          handAdd(e){//如果函数需要参数,但是没有传入,那么函数的行参为undefined
+            console.log(e);
+            this.counter++
+          },
+          handAddTen(count,e){
+            console.log(e);
+            this.counter += 10;
+          }
+        },
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      data: {
+      },
+        methods: {
+          add() {
+            console.log("add")
+          },
+          div() {
+            console.log("div")
+          },
+          submitClick(){
+            console.log('submitClick')
+          },
+          keyup(){
+            console.log('keyup')
+          },
+          btn(){
+            console.log("btn")
+          }
+        },
+    });
+  </script>
+</body>
+
+</html>

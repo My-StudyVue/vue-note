@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <!-- v-for遍历数组 -->
+  <div id="app">
+    <!-- 1.在遍历中,没有使用索引值(下标值) -->
+    <ul>
+      <li v-for = "item in name">{{item}}</li>
+    </ul>
+
+   <!-- 2.在遍历中,获取索引值(下标值) -->
+   <ul>
+    <li v-for = "(item,index) in name">{{index+1}}-{{item}}</li>
+  </ul>
+  </div>
+
+  <!-- v-for遍历对象 -->
+  <div id="app-1">
+    <!-- 1.在遍历中,如果只是获取一个值,那么获取的是value -->
+    <ul>
+      <li v-for = "item in message">{{item}}</li>
+    </ul>
+
+    <!-- 2.获取key和value ------格式: (value,key)-->
+    <ul>
+      <li v-for = "(item,key) in message">{{key}}:{{item}}</li>
+    </ul>
+
+    <!-- 3.获取key和value和index ------格式: (value,key,index)-->
+    <ul>
+      <li v-for = "(item,key,index) in message">{{index+1}}-{{key}}:{{item}}</li>
+    </ul>
+    <!-- 很少使用 -->
+  </div>
+
+  <!-- v-for使用过程添加key -->
+  <div id="app-2">
+
+    <!-- withot key 表示把当前元素取代为我们添加的元素,然后依次更新,再补位 -->
+    <ul>
+      <li v-for = "item in letter">{{item}}</li>
+    </ul>
+    <!-- 效率低 -->
+
+    <!-- with key 表示直接插入-->
+    <ul>
+      <li v-for = "item in letter" :key="item">{{item}}</li>
+    </ul>
+    <!-- :key里的元素跟展示的元素一一对应 ,且要保证唯一性-->
+  </div>
+
+  <div id="app-3">
+    <ul>
+      <li v-for = "item in letter">{{item}}</li>
+    </ul>
+    <button @click = "btn">按钮</button>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        name:[//数组
+          "lyx","is","a","pig"
+        ]
+      }
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      data: {
+        message:{//对象
+          name : 'lyx',
+          age : 19,
+          height : 1.58
+        }
+      }
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      data: {
+        letter:[
+          //.splice(2,2)   表示        在第二个元素后面添加元素且删除第二个元素后两个元素
+          //.splice(2,0,'f')  表示   在第二个元素后面添加元素且不删除第二个元素后的元素,和加上 'f'
+          'l','y','x','h','h','h'//没有保证唯一性
+        ]
+      }
+    });
+
+    var app3= new Vue({
+      el: '#app-3',
+      data: {
+        letter:[
+          'l','y','x','h','h','h'
+        ]
+      },
+      methods: {
+        btn(){//响应式
+          //1.push()方法------最下面加元素
+          // this.letter.push('aaa','bbb')//带参
+
+          //2.pop()方法--------最下面减一个元素
+          //this.letter.pop()
+
+          // 3.shift()方法-------最上面减一个元素
+          //this.letter.shift()
+
+          //4.unshift()方法-----最前面添加元素
+          // this.letter.unshift('aaa','bbb')//带参
+
+          //5.splice()方法-------删除元素/插入元素/替换元素
+            //删除元素:第一个参数是删除元素的位置，第二个参数是那个元素的位置之后的几个元素
+           // this.letter.splice(1)//表示第一个参数后所有元素删掉
+            //替换元素：.........，第二个参数表示要替换几个元素，后面是替换的元素
+           // this.letter.splice(1,3,'f','h','j')//替换
+           //插入元素：.........., 第二个参数传送0，后面表示插入的元素
+           //this.letter.splice(1,0,'x','y','z')
+
+          //6.sort()方法----------排序
+          // this.letter.sort()
+
+          // 7.reverse()方法-----反转
+          // this.letter.reverse()
+
+          //注意通过索引值修改数组中的元素--------------不是响应式
+          // this.letter[0] = 'bbbbb'
+
+          //更改：
+            //this.letter.splice(0,1,'bbbbb')
+            //set(要修改的对象，索引值，修改后的值)
+            Vue.set(this.letter,0,'bbbbb')
+        }
+      },
+    });
+
+    // function sum(...num){//可变参数
+    //   console.log(sum)
+    // }
+    // sum(20,4344343,3434)//很多参数
+  </script>
+</body>
+
+</html>

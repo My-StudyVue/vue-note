@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ES6补充</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+
+  <!-- ES5之前因为if和for都没有块级作用域的概念，所以很多时候，我们都必须借助于function的作用域
+     来解决应用外面变量的问题-->
+  <!-- ES5中的var是没有块级作用域的 -->
+  
+  <!-- ES6中，加入了let它是有if和for的块级作用域的 -->
+  <!-- ES6中的let是有块级作用域的（if/for） -->
+
+  <!-- 块级作用域 -->
+  <script>
+    //1.变量作用域：变量在什么范围内是可用的
+    {
+      var name = 'why';
+      console.log(name);
+    }//块
+    console.log(name);
+
+    //2.没有块级作用域引起的问题：if 的块级
+    var func;
+    if (true){
+      var name = 'why';
+
+      func  =   function() {
+        console.log(name);
+      }
+      func()//调用
+    }
+    name = "lyx"//改动
+    func()
+
+    console.log(name);
+
+     //3.没有块级作用域引起的问题：for 的块级
+
+    // var btns = document.getElementsByTagName('button')
+    // for (var i = 0; i < btns.length; i++){
+    //   (function (num){//闭包解决：函数是个作用域
+    //     btns[i].addEventListener('click',function(){
+    //       console.log('第'+ num +'个按钮被点击');
+    //     })
+    //   })(i)
+    // }
+
+    //ES6写法
+    const btns = document.getElementsByTagName('button')
+    for (let i = 0; i < btns.length; i++){
+        btns[i].addEventListener('click',function(){
+          console.log('第'+ i +'个按钮被点击');
+        })
+    }
+
+  </script>
+
+<!-- 在ES6开发中，优先使用const,只有需要改变某一个标志符的时候才使用let -->
+  <script>
+     //1.一旦给const（常量）修饰标识符之后，不能修改
+     //2.使用const 定义标识符，必须进行赋值
+     //3.常量的含义是指向的对象不能修改，存储位置不能变动
+     //但是可以修改对象内部的属性
+     const sz = {
+        name : 'lyx',
+        age : 19,
+        height : 1.58
+     }
+    //  sz = {}    错误使用
+     console.log(sz);
+
+     sz.name = 'lp';
+     sz.age = 20;
+     sz.height  = 1.66;
+     console.log(sz)
+
+  </script>
+
+  <!-- ES6对象字面量的增强写法 -->
+  <script>
+    // const obj = {}//字面量
+    //1.属性的增强写法
+    const name = 'lyx';
+    const age = 19;
+    const height = 1.58;
+
+    //ES5的写法
+    const sd= {
+      name : name,
+      age : age,
+      height : height,
+    }
+     console.log(sd);
+
+    //ES6的写法
+     const obj= {
+      name,
+      age,
+      height
+    }
+     console.log(obj);     
+
+     //2.函数的增强写法
+     //ES5的写法
+     const zz = {
+       run : function () {
+
+       },
+       eat : function () {
+
+       }
+     }
+     //ES6的写法
+     const hh = {
+       run () {
+
+       },
+       eat () {
+
+       }
+     }
+
+  </script>
+
+</body>
+
+</html>

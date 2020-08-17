@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <!-- v-model基本使用：双向绑定 -->
+  <div id="app">
+    <!-- <input type="text" v-model = "message"> -->
+
+    <!-- v-model原理 -->
+    <input type="text" :value = "message" @input = "change">
+    <!-- <input type="text" :value = "message" @input = "message = $event.target.value"> -->
+
+    {{message}}
+
+    <br>
+    <textarea v-model = "message"></textarea>
+    <p>输入的内容是：{{message}}</p>
+  </div>
+
+  <!--v-model type="radio"  :单选框-->
+  <div id="app-1">
+    <br>
+    <!-- 点击<label>标签中的文本时，浏览器就会自动将焦点转到和该标签相关联的控件上  -->
+    <label for="male">
+      <input type="radio" value = 'male' v-model = "gender" id="male">男
+    </label>
+    <label for="female">
+      <input type="radio" value = 'female' v-model = "gender" id="female">女
+    </label>
+    <!-- v-model/name 同一个变量可以互斥 -->
+    <p>您的选择：{{gender}}</p>
+  </div>
+
+  <!--v-model type="checkbox"  :复选框-->
+  <div id="app-2">
+    <!--1. 单个勾选框 -->
+    <label for="license">
+      <input type="checkbox" id="license" v-model = "isLicense">同意协议
+    </label>
+    <h2>您的选择：{{isLicense}}</h2>
+    <button :disabled = "!isLicense">下一步</button>
+    <!-- 2.多个勾选框 -->
+    <br>
+      <input type="checkbox" value="篮球" v-model = "hobbies" >篮球
+      <input type="checkbox" value="足球" v-model = "hobbies" >足球
+      <input type="checkbox" value="乒乓球" v-model = "hobbies" >乒乓球
+      <input type="checkbox" value="羽毛球" v-model = "hobbies">羽毛球
+      <h3>您的爱好：{{hobbies}}</h3>
+
+      <!-- 值绑定 -->
+      <label v-for = "item in hobby">
+        <input type="checkbox" :value = "item" v-model = "hobbies">{{item}}
+      </label>
+      <h3>您的爱好：{{hobbies}}</h3>
+  </div>
+
+  <!--v-model type="select"  :下拉框-->
+  <div id="app-3">
+    <br>
+    <!--1. 单选 -->
+    <select v-model = "choose">
+      <option value="apple">苹果</option>
+      <option value="orange">橘子</option>
+      <option value="banana">香蕉</option>
+    </select>
+    <p>您最喜欢的水果：{{choose}}</p>
+
+    <!--2. 多选 -->
+    <select v-model = "chose" multiple>
+      <option value="apple">苹果</option>
+      <option value="orange">橘子</option>
+      <option value="banana">香蕉</option>
+    </select>
+    <p>您最喜欢的水果：{{chose}}</p>
+    <!-- 按住 ctrl则可选择多个 -->
+  </div>
+
+  <!-- 修饰符 -->
+  <div id="app-4">
+
+    <!-- 1.lazy:失去焦点或者回车时才能更新 -->
+    <input type="text" v-model.lazy= "message">{{message}}
+    <br>
+    <br>
+
+    <!-- 2.number:（把默认为string类型）转化为number类型 -->
+    <input type="number"  v-model.number = "age"> 
+    <!-- typeof表示获取age的类型 -->
+    <h2>{{typeof (age)}}</h2>
+    <br>
+    <br>
+
+    <!-- 3.trim:首尾(左右)两端去空格-->
+    <input type="text" v-model.trim = "name">
+    <h2>您输入的为：{{name}}</h2>
+  </div>
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        message:"你好",
+      },
+        methods: {
+          change(e){
+            this.message = e.target.value
+          }
+        },
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      data: {
+        gender:'male',
+      },
+    });
+
+    var app2= new Vue({
+      el: '#app-2',
+      data: {
+        isLicense : false,//单选框
+        hobbies:[],//多选框
+        hobby:[
+          "台球","跑步","散步","游泳","篮球"
+        ]
+      }
+    });
+
+    var app3= new Vue({
+      el: '#app-3',
+      data: {
+        choose : '',//单选框
+        chose:[]//多选框
+      }
+    });
+
+    var app4= new Vue({
+      el: '#app-4',
+      data: {
+        message:"",
+        age:0,
+        name:''
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<!-- 常见模块化规范：CommonJS、AMD(少)、CMD(少)，ES6的Module -->
+<body>
+
+<!-- ES6的模块化要加 type="module"-->
+<script src="main.js" type="module"></script>
+<script src="aaa.js" type="module"></script>
+<script src="bbb.js" type="module"></script>
+</body>
+
+<!-- 问题：
+        1.全局变量同名问题
+        2.编写方式对js文件的依赖顺序几乎是强制性的
+ -->
+ <!-- 解决：1.使用匿名函数——闭包
+                          ;(function(){
+
+                            })()
+         但是：代码不可复用
+                      2.在1.基础上使用模块化
+                          var module = (function(){
+                                 //导出对象
+                              var obj={ }
+                              obj.对象 = 对象（声明的）//把声明对象加入到obj内
+
+                              return obj//导出
+                            })()
+                            module.对象//导入——在外面直接调用
+          注意：模块名不同
+ -->
+</html>

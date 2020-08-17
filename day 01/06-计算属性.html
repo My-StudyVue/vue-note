@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <!-- 计算属性基本使用 -->
+  <div id="app">
+    <!-- 1.直接拼接 :语法过于繁琐-->
+    <p>{{fristname}} {{lastname}}</p>
+
+    <!-- 2.通过定义methods -->
+    <p>{{getFullName()}}</p>
+
+    <!-- 3.通过计算属性computed -->
+    <p>{{fullName}}</p>
+  </div>
+
+  <!-- 计算属性操作使用 -->
+  <div id="app-1">
+    <p>总价格:{{price}}</p>
+  </div>
+
+    <!-- 计算属性setter -->
+    <div id="app-2">
+      <p>{{fullName}}</p>
+    </div>
+
+    <!-- methods 和 computed -->
+    <div id="app-3">
+      <!-- <p>{{getFullName()}}</p>
+      <p>{{getFullName()}}</p>
+      <p>{{getFullName()}}</p>
+      <p>{{getFullName()}}</p> -->
+
+      <p>{{fullName}}</p>
+      <p>{{fullName}}</p>
+      <p>{{fullName}}</p>
+      <p>{{fullName}}</p>
+    </div>  
+
+  <script>
+    var app= new Vue({
+      el: '#app',
+      data: {
+        fristname:"你好",
+        lastname:"哈哈哈哈"
+      },
+      //计算属性()
+      computed: {
+        fullName:function(){
+          return this.fristname+' '+this.lastname
+        }
+      },//调用一次
+      methods: {
+        getFullName:function(){
+          return this.fristname+' '+this.lastname
+        }
+      }//调用多次
+    });
+
+    var app1 = new Vue({
+        el: "#app-1", 
+        data: {
+          books:[
+            {id:0,name:'hhhh',price:2},
+            {id:1,name:'xxxxx',price:3},
+            {id:2,name:'gggg',price:4},
+            {id:3,name:'yyyy',price:5},
+          ]
+        },
+        computed:{
+          price:function(){
+            // return this.books.reduce()
+            let result = 0
+            for(let i=0;i<this.books.length;i++){
+              result += this.books[i].price
+            }
+            return result
+
+            // for(let i in this.books){
+            //   this.books[i]
+            // }
+
+            // for(let book of this.books){
+            //   this.books
+            // }
+          }
+        }
+      });
+
+      var app2 = new Vue({
+        el: "#app-2", 
+        data: {
+          fristname:"你好",
+         lastname:"霍霍霍"
+        },
+        computed:{
+          fullName:{
+            set:function(newValue){
+              // console.log('-------',newValue);
+              const names = newValue.split(' ');//截取，对字符串一个分割
+              this.fristname = name[0];
+              this.lastname = name [1];
+            },//一般省略
+            get:function(){//一般实现get方法
+              return this.fristname + ' ' + this.lastname
+            },
+
+            // fullName:function(){//最终这样写
+            //   return this.fristname+' '+this.lastname
+            // }
+          }
+        }
+      });
+
+      var app3= new Vue({
+      el: '#app-3',
+      data: {
+        fristname:"你好",
+        lastname:"哈哈哈哈"
+      },
+      //计算属性()
+      computed: {
+        fullName:function(){
+          console.log('fullName');
+          return this.fristname+' '+this.lastname
+        }
+      },//调用一次
+      methods: {
+        getFullName:function(){
+          console.log('getFullName');
+          return this.fristname+' '+this.lastname
+        }
+      }//调用多次
+    });
+  </script>
+</body>
+
+</html>

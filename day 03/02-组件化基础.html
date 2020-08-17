@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<!-- 封装组件的三种方式：
+  1.创建组件构造器——Vue.exterd()方法
+  2.注册组件（全局和局部）——Vue.component()方法
+  3.使用组件  -->
+
+<body>
+
+  <!-- 基本使用 -->
+  <!-- 3. 使用组件-->
+  <div id="app">
+    <cpn></cpn>
+
+    <div>
+      <cpn></cpn>
+    </div>
+  </div>
+
+  <cpn></cpn>  <!-- 不显示-->
+
+  <!-- 全局组件和局部组件 -->
+  <div id="app-1">
+    <cpn></cpn>
+  </div>
+
+  <!-- 父子组件 -->
+  <div id="app-2">
+    <!-- <cp1></cp1>
+    <cp2></cp2> -->
+    <cp2></cp2>
+  </div>
+
+    <!--组件的语法糖注册方式 -->
+    <div id="app-3">
+      <comp1></comp1>
+      <comp2></comp2>
+    </div>
+
+  <script>
+    //1.创建组件构造器对象——Vue.exterd()方法
+    const myComponent = Vue.extend({
+      template://模板
+        `<div>
+          <h2>组件标题</h2>
+          <p>组件段落内容</p>
+        </div>`
+        //ES6:``（字符串）——自动换行
+        //ES5:"" ''(字符串)
+    });
+
+    //2.  注册组件（全局和局部），并且定义组件标签的名称——Vue.component()方法
+    //Vue.component('组件标签名','组件构造器名')
+    Vue.component('cpn', myComponent)//（全局组件）
+
+    var app= new Vue({
+      el: '#app',
+    });
+
+    var app1= new Vue({
+      el: '#app-1',
+      components:{//（局部组件）
+        //组件标签名:组件构造器名
+        cpn:myComponent
+      }
+    });
+
+    //1.创建第一个组件构造器——子组件
+    const cpn1 = Vue.extend({
+      template://模板
+        `<div>
+            <h2>组件标题1</h2>
+            <p>嘻嘻嘻</p>
+        </div>`
+    });
+
+    //2.创建第二个组件构造器——父组件——>render函数
+    const cpn2 = Vue.extend({
+      template://模板
+        `<div>
+            <h2>组件标题2</h2>
+            <p>哈哈哈</p>
+            <cp1></cp1>
+        </div>`,
+
+        components:{
+          cp1:cpn1
+        }
+
+    });
+
+    //root 组件
+    var app2= new Vue({
+      el: '#app-2',
+      components:{
+        // cp1:cpn1,
+        // cp2:cpn2
+        cp2:cpn2
+      }
+    });
+    
+    //1.创建组件构造器
+    // const c1 = Vue.extend()
+
+    //2.注册组件（全局）
+    Vue.component('comp1',{//内部已经extend
+      template:
+      `<div>
+            <h2>标题</h2>
+            <p>刘艳鑫</p>
+        </div>`
+    })
+
+    var app3= new Vue({//语法糖
+      el: '#app-3',
+      components:{//局部
+        'comp2':{
+          template:
+            `<div>
+              <h2>标题</h2>
+              <p>大傻子</p>
+            </div>`
+        }
+      }
+  });
+    
+  </script>
+</body>
+
+</html>
