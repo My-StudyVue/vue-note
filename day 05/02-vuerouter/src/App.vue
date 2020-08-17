@@ -13,8 +13,12 @@
     <!-- <router-link to="/home" tag="button" replace >首页</router-link>
     <router-link to="/about" tag="li" replace >关于</router-link> -->
 
-    <button @click="homeClick">首页</button>
-    <button @click="aboutClick">关于</button>
+    <!-- <button @click="homeClick">首页</button>
+    <button @click="aboutClick">关于</button> -->
+
+    <router-link  to="/home">首页</router-link>
+    <router-link  to="/about">关于</router-link>
+    <router-link  to="/user">用户</router-link>
 
     <!-- router-view——占位 -->
     <router-view></router-view>

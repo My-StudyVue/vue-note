@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Home from '../components/home.vue'
 import About from "../components/about.vue"
+import User from "../components/user.vue"
 
 //1.通过Vue.use(插件)——安装插件
 Vue.use(VueRouter)
@@ -24,6 +25,10 @@ const routes = [// 抽离出来
   {
     path:'/about',
     component:About
+  },
+  {
+    path:'/user',
+    component:User
   }
 ]
 const router = new VueRouter({
