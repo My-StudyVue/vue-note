@@ -18,7 +18,7 @@
 
     <router-link  to="/home">首页</router-link>
     <router-link  to="/about">关于</router-link>
-    <router-link  to="/user">用户</router-link>
+    <router-link  :to="'/user/'+userId">用户</router-link>
 
     <!-- router-view——占位 -->
     <router-view></router-view>
@@ -28,20 +28,25 @@
 <script>
 export default {
   name: 'App',
-  methods: {
-    homeClick(){
-      //通过代码的方式修改路径
-      //push => pushState
-      // this.$router.push('/home')
-      this.$router.replace('/home')
-      console.log("homeClick");
-    },
-    aboutClick(){
-      // this.$router.push('/about')
-      this.$router.replace('/about')
-      console.log("aboutClick");
+  data() {
+    return {
+      userId:'lisi'
     }
   },
+  // methods: {
+  //   homeClick(){
+  //     //通过代码的方式修改路径
+  //     //push => pushState
+  //     // this.$router.push('/home')
+  //     this.$router.replace('/home')
+  //     console.log("homeClick");
+  //   },
+  //   aboutClick(){
+  //     // this.$router.push('/about')
+  //     this.$router.replace('/about')
+  //     console.log("aboutClick");
+  //   }
+  // }
 }
 </script>
 

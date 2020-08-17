@@ -27,7 +27,7 @@ const routes = [// 抽离出来
     component:About
   },
   {
-    path:'/user',
+    path:'/user/:userId',
     component:User
   }
 ]
