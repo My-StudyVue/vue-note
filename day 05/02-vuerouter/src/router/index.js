@@ -9,6 +9,8 @@ import Vue from 'vue'
 // import User from "../components/user.vue"
 //              //路由懒加载
 const Home = () => import('../components/home.vue')
+const HomeNews = () => import('../components/homeNews.vue')
+const HomeMessage = () => import('../components/homeMessage.vue')
 const About = () => import('../components/about.vue')
 // const User = () => import('../components/user.vue')
 
@@ -25,7 +27,17 @@ const routes = [// 抽离出来
   {
     //   url:     协议头//host/query
     path:'/home',
-    component:Home
+    component:Home,
+    children:[
+      {
+        path:'news',//子路由不需要+ /
+        component:HomeNews
+      },
+      {
+        path:'message',
+        component:HomeMessage
+      }
+    ]
   },
   {
     path:'/about',
