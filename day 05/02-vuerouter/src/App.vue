@@ -30,7 +30,7 @@ export default {
   name: 'App',
   data() {
     return {
-      userId:'lisi'
+      userId:'liuxinxin'
     }
   },
   // methods: {
