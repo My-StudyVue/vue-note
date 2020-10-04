@@ -30,6 +30,10 @@ const routes = [// 抽离出来
     component:Home,
     children:[
       {
+        path:'',
+        redirect:'news'
+      },
+      {
         path:'news',//子路由不需要+ /
         component:HomeNews
       },
