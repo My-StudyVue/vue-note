@@ -18,11 +18,15 @@
 
     <router-link  to="/home">首页</router-link>
     <router-link  to="/about">关于</router-link>
-    <router-link  :to="'/user/'+userId">用户</router-link>
+    <!-- <router-link  :to="'/user/'+userId">用户</router-link> -->
+
     <!-- <router-link  to="/profile">档案</router-link> -->
-    <router-link  :to="{path:'/profile',query:{name:'lyx',age:'19',height:'1.58'}}">档案</router-link>
+    <!-- <router-link  :to="{path:'/profile',query:{name:'lyx',age:19,height:1.58}}">档案</router-link> -->
     <!-- URL: scheme://host:port/path?query#fragment
               协议(http,ftp,tcp)://主机(host,localhost)：端口号(默认为80)/路径(path)?查询(query)#片段 -->
+
+    <button @click="userClick">用户</button>
+    <button @click="profileClick">档案</button>
 
     <!-- router-view——占位 -->
     <router-view></router-view>
@@ -37,7 +41,7 @@ export default {
       userId:'liuxinxin'
     }
   },
-  // methods: {
+  methods: {
   //   homeClick(){
   //     //通过代码的方式修改路径
   //     //push => pushState
@@ -49,8 +53,21 @@ export default {
   //     // this.$router.push('/about')
   //     this.$router.replace('/about')
   //     console.log("aboutClick");
-  //   }
-  // }
+  //   },
+        userClick(){
+          this.$router.push('/user/' + this.userId)
+        },
+        profileClick(){
+          this.$router.push({
+            path:'/profile',
+            query:{
+              name:'lyx',
+              age:19,
+              height:1.58
+            }
+          })
+        }
+  }
 }
 </script>
 
