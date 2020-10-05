@@ -12,7 +12,8 @@ const Home = () => import('../components/home.vue')
 const HomeNews = () => import('../components/homeNews.vue')
 const HomeMessage = () => import('../components/homeMessage.vue')
 const About = () => import('../components/about.vue')
-// const User = () => import('../components/user.vue')
+// const User = () => import('../components/user(params传递参数).vue')
+const Profile = () => import('../components/profile(query传递参数).vue')
 
 //1.通过Vue.use(插件)——安装插件
 Vue.use(VueRouter)
@@ -50,7 +51,11 @@ const routes = [// 抽离出来
   {
     path:'/user/:userId',
     // component:User
-    component:() => import('../components/user.vue')
+    component:() => import('../components/user(params传递参数).vue')
+  },
+  {
+    path:'/profile',
+    component:Profile
   }
 ]
 const router = new VueRouter({

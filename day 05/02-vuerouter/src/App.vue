@@ -19,6 +19,10 @@
     <router-link  to="/home">首页</router-link>
     <router-link  to="/about">关于</router-link>
     <router-link  :to="'/user/'+userId">用户</router-link>
+    <!-- <router-link  to="/profile">档案</router-link> -->
+    <router-link  :to="{path:'/profile',query:{name:'lyx',age:'19',height:'1.58'}}">档案</router-link>
+    <!-- URL: scheme://host:port/path?query#fragment
+              协议(http,ftp,tcp)://主机(host,localhost)：端口号(默认为80)/路径(path)?查询(query)#片段 -->
 
     <!-- router-view——占位 -->
     <router-view></router-view>

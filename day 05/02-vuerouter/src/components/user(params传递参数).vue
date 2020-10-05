@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    name:"user",
+    name:"user(params传递参数)",
     computed:{
       userId(){   
         //$route表示index.js里面配置的router
