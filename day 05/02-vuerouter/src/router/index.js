@@ -53,6 +53,11 @@ const routes = [// 抽离出来
     meta:{//元数据
       title:'关于'
     },
+    //路由独享的守卫
+    beforeEnter: (to, from, next) => {
+      console.log("about beforeEnter");
+      next()
+    }
   },
   {
     path:'/user/:userId',
@@ -81,12 +86,20 @@ const router = new VueRouter({
   linkActiveClass:'active'//设置全局
 })
 
+//全局守卫
+              //前置守卫(guard)
 router.beforeEach((to, from, next) => {
   //从from跳转到to
   // document.title = to.title //to表示路由
   document.title = to.matched[0].meta.title
   //下一步执行
   next()//必须调用
+
+  console.log('===============');
+})
+              //后置钩子(hook),不需要主动调用next
+router.afterEach((to, from) => {
+  console.log('-----------------')
 })
 
 
