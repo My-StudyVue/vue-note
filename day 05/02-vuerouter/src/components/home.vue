@@ -13,7 +13,11 @@
 
 <script>
   export default {
-    name:"home"
+    name:"home",
+    // created(){
+    //   //全局导航守卫——监听路由跳转
+    //   document.title = "首页"//更改标题栏
+    // }
   }
 </script>
 

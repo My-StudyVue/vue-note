@@ -29,6 +29,9 @@ const routes = [// 抽离出来
     //   url:     协议头//host/query
     path:'/home',
     component:Home,
+    meta:{//元素
+      title:'首页'
+    },
     children:[
       {
         path:'',
@@ -46,16 +49,25 @@ const routes = [// 抽离出来
   },
   {
     path:'/about',
-    component:About
+    component:About,
+    meta:{//元数据
+      title:'关于'
+    },
   },
   {
     path:'/user/:userId',
     // component:User
-    component:() => import('../components/user(params传递参数).vue')
+    component:() => import('../components/user(params传递参数).vue'),
+    meta:{//元素
+      title:'用户'
+    },
   },
   {
     path:'/profile',
-    component:Profile
+    component:Profile,
+    meta:{//元素
+      title:'档案'
+    },
   }
 ]
 const router = new VueRouter({
@@ -68,6 +80,15 @@ const router = new VueRouter({
   mode:'history',//配置为html5的history
   linkActiveClass:'active'//设置全局
 })
+
+router.beforeEach((to, from, next) => {
+  //从from跳转到to
+  // document.title = to.title //to表示路由
+  document.title = to.matched[0].meta.title
+  //下一步执行
+  next()//必须调用
+})
+
 
 //3.将router对象传入到vue实例中
 export default router
