@@ -17,3 +17,9 @@ new Vue({
 })
 
 console.log(router);
+
+// const obj = {
+//   name:'lyx'
+// }
+// //定义属性
+// Object.defineProperty(obj,'age',19)
