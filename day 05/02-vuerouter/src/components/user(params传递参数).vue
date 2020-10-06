@@ -4,6 +4,8 @@
     <p>嘻嘻嘻</p>
     <h2>{{userId}}</h2>
     <!-- <h2>{{$route.params.userId}}</h2> -->
+
+    <button @click="btnClick">按钮</button>
   </div>
 </template>
 
@@ -12,9 +14,15 @@
     name:"user(params传递参数)",
     computed:{
       userId(){   
-        //$route表示index.js里面配置的router
-        //$router表示当前router处于活跃 
+        //$router表示index.js里面配置的router
+        //$route表示当前router处于活跃 
         return this.$route.params.userId
+      }
+    },
+    methods:{
+      btnClick(){
+        console.log(this.$router);
+        console.log(this.$route);
       }
     }
   }
