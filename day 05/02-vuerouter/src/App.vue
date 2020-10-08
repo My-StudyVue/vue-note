@@ -28,8 +28,11 @@
     <button @click="userClick">用户</button>
     <button @click="profileClick">档案</button>
 
-    <!-- 被保持路由状态 -->
-    <keep-alive>
+    <!-- 被保持路由状态，避免重新渲染 -->
+    <!-- <keep-alive>两个属性：
+          include:只有匹配的组件被缓存    （字符串或正则表达）
+          exclude:任何匹配的组件不会被缓存（字符串或正则表达） -->
+    <keep-alive exclude="profile">
       <!-- router-view——占位 -->
       <router-view></router-view>
     </keep-alive>

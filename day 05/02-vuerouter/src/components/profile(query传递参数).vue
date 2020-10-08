@@ -12,7 +12,14 @@
 
 <script>
 export default {
-  name:"profile(query传递参数)"
+  name:"profile",
+  created() {
+    console.log('profile created');
+    // document.title = "用户"
+  },
+  destroyed() {
+    console.log("profile destroyed");
+  },
 }
 </script>
 

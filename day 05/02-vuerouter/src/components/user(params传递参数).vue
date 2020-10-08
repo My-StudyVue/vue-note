@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "user(params传递参数)",
+  name: "user",
   computed: {
     userId() {
       //$router表示index.js里面配置的router
@@ -29,9 +29,13 @@ export default {
       console.log(this.name);
     },
   },
-  // created() {
-  //    document.title = "用户"
-  // },
+  created() {
+    console.log('user created');
+    // document.title = "用户"
+  },
+  destroyed() {
+    console.log("user destroyed");
+  },
 };
 </script>
 
