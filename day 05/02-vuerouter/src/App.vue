@@ -32,7 +32,7 @@
     <!-- <keep-alive>两个属性：
           include:只有匹配的组件被缓存    （字符串或正则表达）
           exclude:任何匹配的组件不会被缓存（字符串或正则表达） -->
-    <keep-alive exclude="profile">
+    <keep-alive exclude="profile,user"><!--profile,user 不能＋空格（以及正则表达式）-->
       <!-- router-view——占位 -->
       <router-view></router-view>
     </keep-alive>
