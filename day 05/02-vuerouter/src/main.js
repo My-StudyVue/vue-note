@@ -16,7 +16,7 @@ new Vue({
   render: h => h(App)
 })
 
-console.log(router);
+// console.log(router);
 
 // const obj = {
 //   name:'lyx'

@@ -28,8 +28,12 @@
     <button @click="userClick">用户</button>
     <button @click="profileClick">档案</button>
 
-    <!-- router-view——占位 -->
-    <router-view></router-view>
+    <!-- 被保持路由状态 -->
+    <keep-alive>
+      <!-- router-view——占位 -->
+      <router-view></router-view>
+    </keep-alive>
+    
   </div>
 </template>
 

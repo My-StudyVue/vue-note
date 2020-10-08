@@ -33,10 +33,10 @@ const routes = [// 抽离出来
       title:'首页'
     },
     children:[
-      {
-        path:'',
-        redirect:'news'
-      },
+      // {
+      //   path:'',
+      //   redirect:'news'
+      // },
       {
         path:'news',//子路由不需要+ /
         component:HomeNews
@@ -55,7 +55,7 @@ const routes = [// 抽离出来
     },
     //路由独享的守卫
     beforeEnter: (to, from, next) => {
-      console.log("about beforeEnter");
+      // console.log("about beforeEnter");
       next()
     }
   },
@@ -95,11 +95,11 @@ router.beforeEach((to, from, next) => {
   //下一步执行
   next()//必须调用
 
-  console.log('===============');
+  // console.log('===============');
 })
               //后置钩子(hook),不需要主动调用next
 router.afterEach((to, from) => {
-  console.log('-----------------')
+  // console.log('-----------------')
 })
 
 
