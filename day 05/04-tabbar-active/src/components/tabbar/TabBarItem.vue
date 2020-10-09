@@ -6,7 +6,7 @@
     <div v-else>
       <slot name="item-icon-active"></slot>
     </div>
-    <div :class="{active:isActive}">
+    <div :style="activeStyle">
       <slot name="item-text"></slot>
     </div>
     <!-- 固定 -->
@@ -19,7 +19,11 @@
 export default {
   name:"TabBarItem",
   props:{
-    path:String
+    path:String,
+    activeColor:{
+      type:String,
+      default:'#d81e06'
+    }
   },
   data() {
     return {
@@ -29,6 +33,9 @@ export default {
   computed:{
     isActive(){
       return this.$route.path.indexOf(this.path) !== -1
+    },
+    activeStyle(){
+      return this.isActive ? {color:this.activeColor} : {}
     }
   },
   methods:{
@@ -53,7 +60,7 @@ export default {
     vertical-align: middle;/* 去掉图片默认的3个像素点（px） */
     margin-bottom: 2px;
   }
-  .active{
+  /* .active{
     color: #d81e06;
-  }
+  } */
 </style>
