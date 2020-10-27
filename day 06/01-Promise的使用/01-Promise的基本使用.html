@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise的基本使用</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    // 1.使用setTimeout——异步操作
+    // setTimeout(() => {
+    //   console.log("hello world");
+    // }, 1000);
+
+    //2.promise(类) 对这个异步操作进行封装
+    //new Promise (参数===>函数 ---->(resolve,reject) => {
+    // })
+    //resolve,reject本身又是函数
+    //链式编程
+    // new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     // console.log("hello world");
+
+    //     // setTimeout(() =>{
+    //     //   console.log("hello vuejs");
+
+    //     //   setTimeout(() => {
+    //     //     console.log("hello python");
+    //     //   },1000)
+    //     // },1000)
+
+    //     //     第一次网络请求的代码
+    //     resolve()
+    //   }, 1000);
+    // }).then(() => {
+    //   //    第一次拿到结果的处理代码
+    //   console.log("hello world");
+
+    //   // setTimeout(() => {
+    //   //   console.log("hello vuejs");
+
+    //   //   setTimeout(() => {
+    //   //     console.log("hello python");
+    //   //   }, 1000)
+    //   // }, 1000)
+
+    //   //   第二次网络请求的代码
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       // console.log("hello vuejs");
+
+    //       // setTimeout(() => {
+    //       //   console.log("hello python");
+    //       // }, 1000)
+    //       resolve()
+    //     }, 1000)
+    //   })
+    // }).then(() => {
+    //   //  第二次拿到的处理的代码
+    //   console.log("hello vuejs");
+
+    //   // setTimeout(() => {
+    //   //   console.log("hello python");
+    //   // }, 1000)
+
+    //   //  第三次网路请求的代码
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       // console.log("hello python");
+    //       resolve()
+    //     }, 1000)
+    //   })
+    // }).then(() => {
+    //   // 第三次拿到的处理的代码
+    //   console.log("hello python");
+    // })
+
+    //什么情况下用到Promise?
+    //一般情况下是有异步操作时，使用我们的Promise对这个异步操作进行封装
+
+    //new -> 构造函数(1.保存了一些状态信息  2.执行传入的回调函数--->会传入两个参数[resolve,reject])
+    new Promise((reslove,reject) => {
+      setTimeout(() => {
+        //写异步代码
+        //成功的时候调用resolve
+        // reslove("hello world")
+
+        //失败的时候调用reject
+        reject('error message')
+      },1000)
+    }).then((data) => {
+      //写处理代码
+      // reslove--->then
+      console.log(data);
+      console.log(data);
+      console.log(data);
+      console.log(data);
+    }).catch((err) => {
+      //写处理代码
+      // reject--->catch
+      console.log(err);
+    })
+  </script>
+</body>
+
+</html>
