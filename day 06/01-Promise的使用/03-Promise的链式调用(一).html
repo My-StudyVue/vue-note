@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>03-Promise的链式调用</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    //new Promise (参数===>函数 ---->(resolve,reject) => {
+    // })
+    //resolve,reject本身又是函数
+    //链式编程
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        //     第一次网络请求的代码
+        resolve()
+      }, 1000);
+    }).then(() => {
+      //    第一次拿到结果的处理代码
+      console.log("hello world");
+      //   第二次网络请求的代码
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
+    }).then(() => {
+      //  第二次拿到的处理的代码
+      console.log("hello vuejs");
+
+      //  第三次网路请求的代码
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
+    }).then(() => {
+      // 第三次拿到的处理的代码
+      console.log("hello python");
+    })
+
+  </script>
+</body>
+
+</html>

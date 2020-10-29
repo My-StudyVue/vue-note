@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>04-Promise的链式调用(二)</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    //Wrapped into (包裹起来)
+    //[异步操作]网路请求:aaa ---> 自己处理(10行)
+    //处理： aaa 拼接 111 ---> 自己处理(10行)
+    //处理： aaa 拼接 111 拼接 222---> 自己处理(10行)
+    //
+    // new Promise((reslove,reject) => {
+    //   setTimeout(() => {
+    //     reslove('aaa')
+    //   },1000)
+    // }).then(res => {
+    //   //1.自己处理10行代码
+    //   console.log(res, '第一层的10行代码')
+
+    //   //2.对我们的结果进行第一次的处理
+    //   // res = res + '111'
+    //   return new Promise((reslove,reject) => {
+    //     // reslove(res + '111')
+    //     reject('err')
+    //   })
+    // }).then(res => {
+    //   console.log(res, '第二层的10行代码');
+
+    //   return new Promise(reslove => {
+    //     reslove(res + 222)
+    //   })
+    // }).then(res =>{
+    //   console.log(res, '第三层的10行代码');
+    // }).catch(err => {
+    //   console.log('err');
+    // })
+
+    //new Promise(reslove => reslove('结果'))的简写
+    //
+    new Promise((reslove,reject) => {
+      setTimeout(() => {
+        reslove('aaa')
+      },1000)
+    }).then(res => {
+      //1.自己处理10行代码
+      console.log(res, '第一层的10行代码')
+
+      //2.对我们的结果进行第一次的处理
+      // res = res + '111'
+      // return Promise.resolve(res + '111')
+      // return Promise.reject('error message')
+      throw 'error message'
+    }).then(res => {
+      console.log(res, '第二层的10行代码');
+
+      return Promise.resolve(res + '222')
+    }).then(res =>{
+      console.log(res, '第三层的10行代码');
+    }).catch(err => {
+      console.log('error message');
+    })
+
+    //省略掉Promise.reslove
+    //
+    // new Promise((reslove,reject) => {
+    //   setTimeout(() => {
+    //     reslove('aaa')
+    //   },1000)
+    // }).then(res => {
+    //   //1.自己处理10行代码
+    //   console.log(res, '第一层的10行代码')
+
+    //   //2.对我们的结果进行第一次的处理
+    //   // res = res + '111'
+    //   return res + '111'
+    // }).then(res => {
+    //   console.log(res, '第二层的10行代码');
+
+    //   return res + '222'
+    // }).then(res =>{
+    //   console.log(res, '第三层的10行代码');
+    // })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>05-Promise的all方法的使用</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    // let isResult1 = false
+    // let isResult2 = false
+
+    // //请求一：
+    // $ajax({
+    //   url:'',
+    //   success(){
+    //     console.log('结果一');
+    //     isResult1 = true,
+    //     handleResult()
+    //   }
+    // })
+
+    // //请求二：
+    // $ajax({
+    //   url:'',
+    //   success(){
+    //     console.log('结果二');
+    //     isResult2 = true,
+    //     handleResult()
+    //   }
+    // })
+
+    // function handleResult(){
+    //   if (isResult1 && isResult2) {
+    //     //业务处理
+    //   }
+    // }
+
+    Promise.all([
+      // new Promise((resolve, reject) => {
+      //   $.ajax({
+      //     url: 'url1',
+      //     success(data) {
+      //       resolve(data)
+      //     }
+      //   })
+      // }),
+      // new Promise((resolve, reject) => {
+      //   $.ajax({
+      //     url: 'url2',
+      //     success(data) {
+      //       resolve(data)
+      //     }
+      //   })
+      // })
+
+      
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve('result1')
+          resolve({name:'lyx',age:19})
+        },2000)
+      }),
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve('result2')
+          resolve({name:'lwz',age:20})
+        },1000)
+      })
+    ]).then(results => {
+      // results[0]
+      // results[1]
+      console.log(results);
+    })
+  </script>
+</body>
+
+</html>
