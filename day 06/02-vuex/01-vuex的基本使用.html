@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01-vuex的基本使用</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    //公共对象
+    const shareObj = {//不是响应式的
+      name:'lyx'
+    }
+    //所有的对象共享
+    Vue.prototype.shareObj = shareObj
+
+
+    //所有的组件都继承自 Vue.prototype
+    Vue.component('cpn1',{
+      // this.prototype.name
+    })
+    Vue.component('cpn2',{
+      
+    })
+    const app = new Vue({
+      el:'#app',
+      data:{//加入到vue响应式系统里面了
+        
+      }
+    });
+  </script>
+</body>
+
+</html>
