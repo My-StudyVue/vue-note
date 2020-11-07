@@ -1,13 +1,21 @@
 <template>
   <div id="app">
     <h2>{{message}}</h2>
-    <h2>{{counter}}</h2>
-    <!-- <h2>{{$store.state.counter}}</h2> -->
-    <button @click="counter++">+</button>
-    <button @click="counter--">-</button>
+
+    <h2>-------APP内容--------</h2>
+    <!-- <h2>{{counter}}</h2> -->
+    <h2>{{$store.state.counter}}</h2>
+<!--  -->
+<!--  -->
+    <!-- <button @click="counter++">+</button>
+    <button @click="counter--">-</button> -->
+<!--  -->
     <!-- <button @click="$store.state.counter++">+</button>
     <button @click="$store.state.counter--">-</button> -->
+    <button @click="addition">+</button>
+    <button @click="subtraction">-</button>
 
+    <h2>-------vuex内容--------</h2>
     <!-- <hello-vuex :counter="counter"/> -->
     <hello-vuex/>
   </div>
@@ -22,6 +30,14 @@ export default {
     return {
       message: 'HelloVuex'
       // counter: 0
+    }
+  },
+  methods: {
+    addition () {
+      this.$store.commit('increment')
+    },
+    subtraction () {
+      this.$store.commit('decrement')
     }
   },
   components: {
