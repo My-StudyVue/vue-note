@@ -15,6 +15,15 @@
     <button @click="addition">+</button>
     <button @click="subtraction">-</button>
 
+    <h2>-------APP内容:getters相关信息--------</h2>
+    <!-- <h2>{{$store.state.counter*$store.state.counter}}</h2> -->
+    <h2>{{$store.getters.powerCouter}}</h2>
+    <!-- <h1>{{getGreateAgeCout}}</h1> -->
+    <h1>{{$store.getters.more20stu}}</h1>
+    <!-- <h1>{{$store.getters.more20stu.length}}</h1> -->
+    <h1>{{$store.getters.more20stuLength}}</h1>
+    <h1>{{$store.getters.moreAgestu(8)}}</h1>
+
     <h2>-------vuex内容--------</h2>
     <!-- <hello-vuex :counter="counter"/> -->
     <hello-vuex/>
@@ -40,6 +49,14 @@ export default {
       this.$store.commit('decrement')
     }
   },
+  // computed: {
+  //   getGreateAgeCout () {
+  //     return this.$store.state.students.filter(s => s.age >= 20).length
+  //     // (s => {
+  //     //   s.age >= 20 // 返回是个Boolean值
+  //     // })
+  //   }
+  // },
   components: {
     HelloVuex
   }
