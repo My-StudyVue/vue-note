@@ -1,32 +1,38 @@
 <template>
   <div id="app">
-    <h2>{{message}}</h2>
+    <h2>{{ message }}</h2>
 
     <h2>-------APP内容--------</h2>
     <!-- <h2>{{counter}}</h2> -->
-    <h2>{{$store.state.counter}}</h2>
-<!--  -->
-<!--  -->
+    <h2>{{ $store.state.counter }}</h2>
+    <!--  -->
+    <!--  -->
     <!-- <button @click="counter++">+</button>
     <button @click="counter--">-</button> -->
-<!--  -->
+    <!--  -->
     <!-- <button @click="$store.state.counter++">+</button>
     <button @click="$store.state.counter--">-</button> -->
     <button @click="addition">+</button>
     <button @click="subtraction">-</button>
+    <!--  -->
+    <!-- <button @click="addFive">+5</button>
+    <button @click="addTen">+10</button> -->
+    <button @click="addCount(5)">+5</button>
+    <button @click="addCount(10)">+10</button>
+     <button @click="addStudent">添加学生</button>
 
     <h2>-------APP内容:getters相关信息--------</h2>
     <!-- <h2>{{$store.state.counter*$store.state.counter}}</h2> -->
-    <h2>{{$store.getters.powerCouter}}</h2>
+    <h2>{{ $store.getters.powerCouter }}</h2>
     <!-- <h1>{{getGreateAgeCout}}</h1> -->
-    <h1>{{$store.getters.more20stu}}</h1>
+    <h1>{{ $store.getters.more20stu }}</h1>
     <!-- <h1>{{$store.getters.more20stu.length}}</h1> -->
-    <h1>{{$store.getters.more20stuLength}}</h1>
-    <h1>{{$store.getters.moreAgestu(8)}}</h1>
+    <h1>{{ $store.getters.more20stuLength }}</h1>
+    <h1>{{ $store.getters.moreAgestu(8) }}</h1>
 
     <h2>-------vuex内容--------</h2>
     <!-- <hello-vuex :counter="counter"/> -->
-    <hello-vuex/>
+    <hello-vuex />
   </div>
 </template>
 
@@ -47,6 +53,18 @@ export default {
     },
     subtraction () {
       this.$store.commit('decrement')
+    },
+    addCount (count) {
+      // count ----> 参数(payload ------> 负载，载荷)
+      this.$store.commit('incrementCount', count)
+    },
+    addStudent () {
+      const stu = {
+        id: 114,
+        name: 'xm',
+        age: 100
+      }
+      this.$store.commit('addStudent', stu)
     }
   },
   // computed: {
@@ -64,12 +82,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

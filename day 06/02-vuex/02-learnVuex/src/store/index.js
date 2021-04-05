@@ -12,10 +12,10 @@ const store = new Vuex.Store({
   state: {
     counter: 100,
     students: [
-      {id: 110, name: 'lyx', age: 19},
-      {id: 111, name: 'lwz', age: 20},
-      {id: 112, name: 'hhh', age: 25},
-      {id: 113, name: 'xxx', age: 3}
+      { id: 110, name: 'lyx', age: 19 },
+      { id: 111, name: 'lwz', age: 20 },
+      { id: 112, name: 'hhh', age: 25 },
+      { id: 113, name: 'xxx', age: 3 }
     ]
   },
   mutations: {
@@ -27,6 +27,12 @@ const store = new Vuex.Store({
     },
     decrement (state) {
       state.counter--
+    },
+    incrementCount (state, count) {
+      state.counter += count
+    },
+    addStudent (state, stu) {
+      state.students.push(stu)
     }
   },
   actions: {
