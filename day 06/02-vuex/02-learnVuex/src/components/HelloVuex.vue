@@ -4,9 +4,10 @@
     <h2>{{$store.state.counter}}</h2>
     <!-- <h2>{{$store.state.counter*$store.state.counter}}</h2> -->
     <h2>{{$store.getters.powerCouter}}</h2>
-<!-- 必须得写一份computed -->
+    <!-- 必须得写一份computed -->
     <!-- <h1>{{getGreateAgeCout}}</h1> -->
     <h1>{{$store.getters.more20stu}}</h1>
+    <h2>{{$store.state.info}}</h2>
   </div>
 </template>
 
